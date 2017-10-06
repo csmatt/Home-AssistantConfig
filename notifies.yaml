@@ -1,0 +1,13 @@
+- name: email
+  platform: smtp
+  server: smtp.gmail.com
+  port: 587
+  timeout: 15
+  sender: !secret sender_email
+  encryption: starttls
+  username: !secret sender_email
+  password: !secret notify_email_password
+  recipient:
+    - !secret main_receive_email
+    - !secret phone_number
+  sender_name: My Home Assistant

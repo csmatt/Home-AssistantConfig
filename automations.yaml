@@ -1,0 +1,34 @@
+- id: flood_sensor_triggered
+  alias: Flood Sensor Trigger Automation
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.dome_water_sensor_sensor
+      from: 'off'
+      to: 'on'
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.dome_main_water_shutoff_valve_switch
+    - service: notify.email
+      data:
+        title: 'Basement Flood!'
+        message: 'A flood has occurred! Water has been shut off.'
+
+- id: dome_water_sensor_battery_low
+  alias: 'Battery Low Alert - Flood Sensor'
+  initial_state: True
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.dome_water_sensor_battery_level
+    below: 10
+  action:
+    service: notify.email
+    data:
+      title: 'Battery Low Alert - Flood Sensor'
+      message: "Time to change the flood sensor's battery. Its level is {{ states.zwave.dome_water_sensor.attributes.battery_level }}%"
+
+#- id: temp_low_turn_off_fan
+#  alias: "Temperature Low - Turn off fan'
+  

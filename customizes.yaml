@@ -1,0 +1,6 @@
+binary_sensor.unnamed_device_7: 
+  friendly_name: Back Deck Door
+binary_sensor.unnamed_device_8:
+  friendly_name: Front Door
+binary_sensor.unnamed_device_10:
+  friendly_name: Side Door

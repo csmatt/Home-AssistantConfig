@@ -1,0 +1,66 @@
+default_view:
+  view: yes
+  icon: mdi:home 
+  entities:
+    - group.flood
+    - group.entertainment
+    - group.climate
+    - group.system
+    - group.fan
+    - group.cover
+    - group.concord4
+
+flood:
+  name: Flood
+  entities:
+    - binary_sensor.dome_water_sensor_sensor
+    - switch.dome_main_water_shutoff_valve_switch
+    - sensor.dome_water_sensor_battery_level
+
+entertainment:
+  name: Entertainment
+  entities:
+    - media_player.sony_bravia_tv
+    - remote.logitech_harmony
+
+climate:
+  name: Climate
+  entities:
+    - climate.upstairs
+    - sensor.yr_symbol
+    - sensor.yweather_current
+    - sensor.yweather_temperature
+    - sensor.yweather_temperature_min
+    - sensor.yweather_temperature_max
+    - sensor.yweather_wind_speed
+    - sun.sun
+
+system:
+  name: System
+  entities:
+    - sensor.cpu_use
+    - sensor.disk_use_home
+    - sensor.ram_free
+    - sensor.received_wlan0
+    - sensor.sent_wlan0
+
+cover:
+  name: Cover
+  entities:
+    - cover.garage_door_opener
+
+concord4:
+  name: Concord4
+  entities:
+    - binary_sensor.unnamed_device_7
+    - binary_sensor.unnamed_device_8
+    - binary_sensor.unnamed_device_10
+
+fan:
+  name: Fan
+  entities:
+    - switch.fan_light
+    - switch.fan_off
+    - switch.fan1
+    - switch.fan2
+    - switch.fan3

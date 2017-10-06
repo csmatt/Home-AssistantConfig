@@ -1,0 +1,22 @@
+platform: command_line
+switches:
+  fan_light:
+    command_on: "~/.homeassistant/scripts/fan.py light"
+    command_off: "~/.homeassistant/scripts/fan.py light"
+    friendly_name: "Light"
+  fan_off:
+    command_on: "~/.homeassistant/scripts/fan.py fan_off"
+    command_off: "~/.homeassistant/scripts/fan.py fan_off"
+    friendly_name: "Off"
+  fan1:
+    command_on: "~/.homeassistant/scripts/fan.py fan1"
+    command_off: "~/.homeassistant/scripts/fan.py fan1"
+    friendly_name: "Speed 1"
+  fan2:
+    command_on: "~/.homeassistant/scripts/fan.py fan2"
+    command_off: "~/.homeassistant/scripts/fan.py fan2"
+    friendly_name: "Speed 2"
+  fan3:
+    command_on: "~/.homeassistant/scripts/fan.py fan3"
+    command_off: "~/.homeassistant/scripts/fan.py fan3"
+    friendly_name: "Speed 3"

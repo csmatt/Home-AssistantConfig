@@ -1,0 +1,13 @@
+garage_door:
+  name: Garage is open
+  done_message: Garage is closed
+  entity_id: cover.garage_door_opener
+  state: 'open'
+  repeat:
+    - 10
+    - 60
+    - 120
+  can_acknowledge: True
+  skip_first: True
+  notifiers:
+    - email
