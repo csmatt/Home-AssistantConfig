@@ -1,6 +1,10 @@
+binary_sensor.unnamed_device:
+  friendly_name: Basement Back Door
+binary_sensor.unnamed_device_4:
+  friendly_name: Garage Motion Sensor
 binary_sensor.unnamed_device_7: 
   friendly_name: Back Deck Door
-binary_sensor.unnamed_device_8:
+binary_sensor.unnamed_device_6:
   friendly_name: Front Door
 binary_sensor.unnamed_device_10:
   friendly_name: Side Door

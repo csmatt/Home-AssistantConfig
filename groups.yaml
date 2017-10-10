@@ -9,6 +9,7 @@ default_view:
     - group.fan
     - group.cover
     - group.concord4
+    - group.basement
 
 flood:
   name: Flood
@@ -52,8 +53,10 @@ cover:
 concord4:
   name: Concord4
   entities:
+    - binary_sensor.unnamed_device
+    - binary_sensor.unnamed_device_4
     - binary_sensor.unnamed_device_7
-    - binary_sensor.unnamed_device_8
+    - binary_sensor.unnamed_device_6
     - binary_sensor.unnamed_device_10
 
 fan:
@@ -64,3 +67,9 @@ fan:
     - switch.fan1
     - switch.fan2
     - switch.fan3
+
+basement:
+  name: Basement
+  entities:
+    - light.front_dimmer_basement_level
+    - light.back_dimmer_basement_level
