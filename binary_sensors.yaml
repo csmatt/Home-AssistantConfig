@@ -1,0 +1,13 @@
+- platform: concord232
+- platform: template
+  sensors:
+    side_door:
+      friendly_name: "Side Door"
+      device_class: opening
+      entity_id: binary_sensor.unnamed_device_4
+      value_template: >-
+        {% if is_state("binary_sensor.unnamed_device_4", "on") %}
+          off
+        {% else %}
+          on
+        {% endif %}

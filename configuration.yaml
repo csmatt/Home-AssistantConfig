@@ -77,6 +77,7 @@ group: !include groups.yaml
 automation: !include automations.yaml
 notify: !include notifies.yaml
 sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
 alert: !include alerts.yaml
 switch: !include switches.yaml
 
@@ -86,9 +87,6 @@ cover:
     password: !secret myq_password
     type: chamberlain
 
-alarm_control_panel:
-  - platform: concord232
-
-binary_sensor:
-  - platform: concord232
+#alarm_control_panel:
+#  - platform: concord232
 

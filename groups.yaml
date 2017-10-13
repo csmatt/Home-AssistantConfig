@@ -53,6 +53,7 @@ cover:
 concord4:
   name: Concord4
   entities:
+    - binary_sensor.side_door
     - binary_sensor.unnamed_device
     - binary_sensor.unnamed_device_4
     - binary_sensor.unnamed_device_7
