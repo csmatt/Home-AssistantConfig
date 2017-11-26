@@ -1,3 +1,22 @@
+- alias: 'Auto Renew SSL Cert'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 29
+  action:
+    service: shell_command.renew_ssl
+
+- alias: 'SSL expiry notification'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 21
+  action:
+    service: notify.email
+    data:
+      title: 'Home Assistant SSL Certification Expiration Warning'
+      message: 'Warning - SSL certificate expires in 21 days and has not been automatically renewed'
+
 - id: flood_sensor_triggered
   alias: Flood Sensor Trigger Automation
   initial_state: True
@@ -28,6 +47,25 @@
     data:
       title: 'Battery Low Alert - Flood Sensor'
       message: "Time to change the flood sensor's battery. Its level is {{ states.zwave.dome_water_sensor.attributes.battery_level }}%"
+
+#- id: co_and_fire_alarm_triggered
+#  alias CO And Fire Alarm Trigger Automation
+#  trigger:
+#    - platform: state
+
+
+- id: co_and_fire_alarm_battery_low
+  alias: 'Battery Low Alert - CO And Fire Alarm'
+  initial_state: True
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.co_and_fire_alarm_battery_level
+    below: 10
+  action:
+    service: notify.email
+    data:
+      title: 'Battery Low Alert - CO And Fire Alarm'
+      message: "Time to change the CO and Fire Alarm's battery. Its level is {{ states.zwave.co_and_fire_alarm.attributes.battery_level }}%"
 
 #- id: temp_low_turn_off_fan
 #  alias: "Temperature Low - Turn off fan'

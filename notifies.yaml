@@ -9,5 +9,4 @@
   password: !secret notify_email_password
   recipient:
     - !secret main_receive_email
-    - !secret phone_number
   sender_name: My Home Assistant
