@@ -28,6 +28,7 @@ climate:
   name: Climate
   entities:
     - climate.upstairs
+    - climate.dining_room
     - sensor.yr_symbol
     - sensor.yweather_current
     - sensor.yweather_temperature

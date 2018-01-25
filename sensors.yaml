@@ -11,6 +11,20 @@
       friendly_name: "CO And Fire Alarm Battery Level"
       value_template: '{{ states.zwave.co_and_fire_alarm.attributes.battery_level }}'
       unit_of_measurement: '%'
+    status_co_and_fire_alarm:
+      friendly_name: "CO And Fire Alarm Status"
+      value_template: >-
+          {%- if is_state("sensor.co_and_fire_alarm_alarm_type", "13") %}
+              Idle
+          {%- elif is_state("sensor.co_and_fire_alarm_alarm_type", "1") %}
+              Fire Detected
+          {%- elif is_state("sensor.co_and_fire_alarm_alarm_type", "2") %}
+              Carbon Monoxide Detected
+          {%- elif is_state("sensor.co_and_fire_alarm_alarm_type", "12") %}
+              Alarm Testing
+          {% else %}
+              Unknown
+          {%- endif %}
 
 - platform: systemmonitor
   resources:

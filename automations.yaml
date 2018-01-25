@@ -48,11 +48,17 @@
       title: 'Battery Low Alert - Flood Sensor'
       message: "Time to change the flood sensor's battery. Its level is {{ states.zwave.dome_water_sensor.attributes.battery_level }}%"
 
-#- id: co_and_fire_alarm_triggered
-#  alias CO And Fire Alarm Trigger Automation
-#  trigger:
-#    - platform: state
-
+- id: co_and_fire_alarm_triggered
+  alias: 'CO And Fire Alarm Triggered Automation'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.co_and_fire_alarm_alarm_type
+    below: 3
+  action:
+    service: notify.email
+    data:
+      title: "CO and Fire Alarm Alert!"
+      message: "CO and Fire Alarm state is {{states('sensor.status_co_and_fire_alarm')}}"
 
 - id: co_and_fire_alarm_battery_low
   alias: 'Battery Low Alert - CO And Fire Alarm'
