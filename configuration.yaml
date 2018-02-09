@@ -15,6 +15,11 @@ homeassistant:
 shell_command:
   renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges tls-sni-01 --tls-sni-01-port 8123 --pre-hook "sudo systemctl stop home-assistant" --post-hook "sudo systemctl start home-assistant"
 
+logger:
+  default: warning
+  logs:
+    homeassistant.components.mqtt: debug
+
 # Show links to resources in log and frontend
 introduction:
 
@@ -23,6 +28,10 @@ frontend:
 
 # Enables configuration UI
 config:
+
+duckdns:
+  domain: !secret duckdns_domain
+  access_token: !secret duckdns_access_token
 
 http:
   # Uncomment this to add a password (recommended!)
@@ -63,10 +72,14 @@ tts:
 zwave:
   usb_path: /dev/zwave
 
-remote:
-  - platform: harmony
-    name: Logitech Harmony
-    host: 192.168.1.178
+zha:
+  usb_path: /dev/zigbee
+  database_path: /home/homeassistant/.homeassistant/zigbee.db
+
+#remote:
+#  - platform: harmony
+#    name: Logitech Harmony
+#    host: 192.168.1.178
 
 nest:
   client_id: !secret nest_client_id
@@ -89,6 +102,15 @@ cover:
     username: !secret myq_username
     password: !secret myq_password
     type: chamberlain
+
+mqtt:
+  broker: 127.0.0.1
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  client_id: homeassistant-1
+
+device_tracker:
+  - platform: owntracks
 
 #alarm_control_panel:
 #  - platform: concord232

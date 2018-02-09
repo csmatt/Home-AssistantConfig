@@ -1,12 +1,11 @@
-- alias: 'Auto Renew SSL Cert'
+- alias: Auto Renew SSL Cert
   trigger:
     platform: numeric_state
     entity_id: sensor.ssl_cert_expiry
     below: 29
   action:
     service: shell_command.renew_ssl
-
-- alias: 'SSL expiry notification'
+- alias: SSL expiry notification
   trigger:
     platform: numeric_state
     entity_id: sensor.ssl_cert_expiry
@@ -14,30 +13,29 @@
   action:
     service: notify.email
     data:
-      title: 'Home Assistant SSL Certification Expiration Warning'
-      message: 'Warning - SSL certificate expires in 21 days and has not been automatically renewed'
-
+      title: Home Assistant SSL Certification Expiration Warning
+      message: Warning - SSL certificate expires in 21 days and has not been automatically
+        renewed
 - id: flood_sensor_triggered
   alias: Flood Sensor Trigger Automation
-  initial_state: True
-  hide_entity: False
+  initial_state: true
+  hide_entity: false
   trigger:
-    - platform: state
-      entity_id: binary_sensor.dome_water_sensor_sensor
-      from: 'off'
-      to: 'on'
+  - platform: state
+    entity_id: binary_sensor.dome_water_sensor_sensor
+    from: 'off'
+    to: 'on'
   action:
-    - service: switch.turn_off
-      data:
-        entity_id: switch.dome_main_water_shutoff_valve_switch
-    - service: notify.email
-      data:
-        title: 'Basement Flood!'
-        message: 'A flood has occurred! Water has been shut off.'
-
+  - service: switch.turn_off
+    data:
+      entity_id: switch.dome_main_water_shutoff_valve_switch
+  - service: notify.email
+    data:
+      title: Basement Flood!
+      message: A flood has occurred! Water has been shut off.
 - id: dome_water_sensor_battery_low
-  alias: 'Battery Low Alert - Flood Sensor'
-  initial_state: True
+  alias: Battery Low Alert - Flood Sensor
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.dome_water_sensor_battery_level
@@ -45,11 +43,11 @@
   action:
     service: notify.email
     data:
-      title: 'Battery Low Alert - Flood Sensor'
-      message: "Time to change the flood sensor's battery. Its level is {{ states.zwave.dome_water_sensor.attributes.battery_level }}%"
-
+      title: Battery Low Alert - Flood Sensor
+      message: Time to change the flood sensor's battery. Its level is {{ states.zwave.dome_water_sensor.attributes.battery_level
+        }}%
 - id: co_and_fire_alarm_triggered
-  alias: 'CO And Fire Alarm Triggered Automation'
+  alias: CO And Fire Alarm Triggered Automation
   trigger:
     platform: numeric_state
     entity_id: sensor.co_and_fire_alarm_alarm_type
@@ -57,12 +55,11 @@
   action:
     service: notify.email
     data:
-      title: "CO and Fire Alarm Alert!"
-      message: "CO and Fire Alarm state is {{states('sensor.status_co_and_fire_alarm')}}"
-
+      title: CO and Fire Alarm Alert!
+      message: CO and Fire Alarm state is {{states('sensor.status_co_and_fire_alarm')}}
 - id: co_and_fire_alarm_battery_low
-  alias: 'Battery Low Alert - CO And Fire Alarm'
-  initial_state: True
+  alias: Battery Low Alert - CO And Fire Alarm
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.co_and_fire_alarm_battery_level
@@ -70,9 +67,30 @@
   action:
     service: notify.email
     data:
-      title: 'Battery Low Alert - CO And Fire Alarm'
-      message: "Time to change the CO and Fire Alarm's battery. Its level is {{ states.zwave.co_and_fire_alarm.attributes.battery_level }}%"
-
-#- id: temp_low_turn_off_fan
-#  alias: "Temperature Low - Turn off fan'
-  
+      title: Battery Low Alert - CO And Fire Alarm
+      message: Time to change the CO and Fire Alarm's battery. Its level is {{ states.zwave.co_and_fire_alarm.attributes.battery_level
+        }}%
+- id: approaching_home
+  alias: Approaching Home
+  trigger:
+  - platform: mqtt
+    topic: owntracks/matt/phone/event
+  condition:
+  - condition: template
+    value_template: '{{ trigger.payload_json.desc == "Almost Home" and trigger.payload_json.event
+      == "enter" }}'
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - data:
+      message: hi
+      title: hi
+    service: notify.email
+  - data:
+      entity_id: cover.garage_door_opener
+    service: cover.open_cover
